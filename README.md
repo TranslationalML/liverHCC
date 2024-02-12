@@ -13,18 +13,18 @@ The below parameters can be tuned to adjust the weight of each loss and the beha
 
 ## Parameters
 - `lambda` ($\lambda$): The lambda parameter can be tuned between 0 and 1 to balance the weight of each loss in DETECT loss $L_{DETECT}= \lambda \cdot L_{seg} + (1-\lambda) \cdot L_{temp}$
-- `art_factor, del_factor, art_del_factor` ($\gamma, \delta, \epsilon$): Weights for the temporal loss: $L_T = \gamma \cdot L_{a} + \delta \cdot L_{d} + \epsilon \cdot L_{a-d}$
+- `art_factor, del_factor, art_del_factor` ($\gamma, \delta, \epsilon$): Weights for the temporal loss $L_T = \gamma \cdot L_{a} + \delta \cdot L_{d} + \epsilon \cdot L_{a-d}$
 - `alpha, beta` ($\alpha, \beta$): Parameters controlling the trade-off between false positives and false negatives in the Tversky loss.
 - `min_lesion_size`: Minimum number of voxels of a component in the prediction mask to apply the temporal loss $L_T$.
 - `inside_liver_ratio`: Minimum overlap between the lesion and the liver.
-- `dilation_kernel`: Size of the kernel used for dilation of lesion masks. Higher values will increase the surrounding area of the lesion.
+- `dilation_kernel`: Size of the kernel used for dilation of lesion masks. Higher values increase the surrounding area of the lesion.
 - `k_art_del, k_art, k_del` ($k$): Constants adjusting steepness in the sigmoid functions for temporal loss $L_T$.
 - `teta_art_del, teta_art, teta_del` ($\theta$): Constants adjusting the offset of the sigmoid functions for temporal loss $L_T$.
 - `cca_num_iterations`: Number of iterations for connected component analysis.
 - `threshold`: Threshold applied to the output probability map before applying connected component analysis.
-- `art_inside_low_bound, del_inside_low_bound, del_inside_high_bound`: Percentile bounds for determining high/low-intensity pixels within lesions.
-- `outside_low_bound, outside_high_bound`: Percentile bounds for analyzing the intensity of pixels surrounding lesions.
-- `min_outside_bound`: Minimum acceptable median intensity for pixels outside lesions.
+- `art_inside_low_bound, del_inside_low_bound, del_inside_high_bound` : Percentile bounds for determining inside lesion pixel intensities $In^a$ in arterial phase and $In^d$ in delayed phase.
+- `outside_low_bound, outside_high_bound`: Percentile bounds for selecting the pixels for the surrounding lesions $Out^a$ in arterial phase and $Out^d$ in delayed phase.
+- `min_outside_bound`: That threshold allows to remove remaining extrem small values in the surrounding of a prediction when the prediction is located in a dark region.
 
 
 
